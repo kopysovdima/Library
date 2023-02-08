@@ -126,19 +126,16 @@ namespace Library
             int index;
 
             Console.Write("Введите иномер книги для удаления: ");
-            index = ReadInt() - 1;
+            index = ReadInt();
 
-            if (index >= 0)
+            if (0 > index || index > _books.Count)
             {
-                if (index <= _books.Count)
-                {
-                    _books.RemoveAt(index);
-                    Console.WriteLine("Книга удалена.");
-                }
+                Console.WriteLine("Такого номера нет в списке.");
             }
             else
             {
-                Console.WriteLine("Такого номера нет в списке.");
+                _books.RemoveAt(index - 1);
+                Console.WriteLine("Книга удалена.");
             }
         }
 
@@ -186,6 +183,18 @@ namespace Library
             }
         }
 
+        private static int ReadInt()
+        {
+            int result;
+
+            while (int.TryParse(Console.ReadLine(), out result) == false)
+            {
+                Console.WriteLine("Неверный ввод числа!\nНеобходимо ввести целое число.");
+                Console.Write("Введите целое число: ");
+            }
+
+            return result;
+        }
 
         private void FindBooksByAuthor()
         {
@@ -283,19 +292,6 @@ namespace Library
         private void ShowMassageBooksNotFound()
         {
             Console.WriteLine("Ни одной книги не найдено\n");
-        }
-
-        private static int ReadInt()
-        {
-            int result;
-
-            while (int.TryParse(Console.ReadLine(), out result) == false)
-            {
-                Console.WriteLine("Неверный ввод числа!\nНеобходимо ввести целое число.");
-                Console.Write("Введите целое число: ");
-            }
-
-            return result;
         }
     }
 }
