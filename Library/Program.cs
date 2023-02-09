@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library
 {
@@ -14,6 +11,7 @@ namespace Library
             const string CommandDeletBook = "2";
             const string CommandSearchBook = "3";
             const string CommandExit = "4";
+
             Library library = new Library();
             bool isActive = true;
 
@@ -32,16 +30,20 @@ namespace Library
                     case CommandAddBook:
                         library.AddBook();
                         break;
+
                     case CommandDeletBook:
                         library.RemoveBook();
                         break;
+
                     case CommandSearchBook:
                         library.FindBooks();
                         break;
+
                     case CommandExit:
                         isActive = false;
                         Console.WriteLine("\nПока! Ещё увидимся!\n");
                         break;
+                         
                     default:
                         Console.WriteLine("Такой команды нет, попробуй ещё раз.\n");
                         break;
@@ -54,11 +56,6 @@ namespace Library
 
     class Book
     {
-        public string Title { get; private set; }
-        public string Author { get; private set; }
-        public int Year { get; private set; }
-        public string Genre { get; private set; }
-
         public Book(string title, string author, int year, string genre)
         {
             Title = title;
@@ -66,6 +63,11 @@ namespace Library
             Year = year;
             Genre = genre;
         }
+
+        public string Title { get; private set; }
+        public string Author { get; private set; }
+        public int Year { get; private set; }
+        public string Genre { get; private set; }
 
         public void ShowInfo()
         {
@@ -96,7 +98,8 @@ namespace Library
 
             for (int i = 0; i < _books.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {_books[i].Author}: \"{_books[i].Title}\", {_books[i].Year}, {_books[i].Genre}");
+                int numberBook = i+ 1;
+                Console.WriteLine($"{numberBook}. {_books[i].Author}: \"{_books[i].Title}\", {_books[i].Year}, {_books[i].Genre}");
             }
 
             Console.WriteLine();
@@ -146,6 +149,7 @@ namespace Library
             const string CommandFindBooksByYearOfPublication = "3";
             const string CommandFindByGenreBooks = "4";
             const string CommandExit = "5";
+
             bool isActive = true;
 
             while (isActive)
@@ -161,21 +165,26 @@ namespace Library
                 switch (Console.ReadLine())
                 {
                     case CommandFindBooksByAuthor:
-                        FindBooksByAuthor();
+                        ShowBooksByAuthor();
                         break;
+
                     case CommandFindByTitleBooks:
                         FindByTitleBooks();
                         break;
+
                     case CommandFindBooksByYearOfPublication:
                         FindBooksByYearOfPublication();
                         break;
+
                     case CommandFindByGenreBooks:
                         FindByGenreBooks();
                         break;
+
                     case CommandExit:
                         isActive = false;
                         Console.WriteLine("Выход из поиска.\n");
                         break;
+
                     default:
                         Console.WriteLine("Вы ввели не правильную команду, пожалуйста повторите попытку!");
                         break;
@@ -196,7 +205,7 @@ namespace Library
             return result;
         }
 
-        private void FindBooksByAuthor()
+        private void ShowBooksByAuthor()
         {
             string author;
             bool isNotFound = true;
